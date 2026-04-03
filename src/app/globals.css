@@ -1,0 +1,42 @@
+/* ── Google Fonts ──────────────────────────────────────────────────────────── */
+/* Imported here (not per-page) to prevent inner page font drift */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Reset / base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #F0F9FF;
+  color: #0C1A2E;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+  color: #0C1A2E;
+}
+
+a {
+  color: inherit;
+}
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --primary:     #0369A1;
+  --accent:      #06B6D4;
+  --bg:          #F0F9FF;
+  --text:        #0C1A2E;
+  --text-muted:  #64748B;
+  --border:      #BAE6FD;
+  --surface:     #ffffff;
+  --urgency:     #F59E0B;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+}
