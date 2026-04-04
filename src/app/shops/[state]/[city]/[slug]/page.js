@@ -6,11 +6,14 @@ import {
 import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import PageNav from '@/components/PageNav';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import QuoteForm from './QuoteForm';
+import { isPremium } from '@/lib/premium';
 
-const PhoneLink = dynamic(() => import('@/components/TrackingLinks').then(m => ({ default: m.PhoneLink })), { ssr: false });
-const OutboundLink = dynamic(() => import('@/components/TrackingLinks').then(m => ({ default: m.OutboundLink })), { ssr: false });
+export const dynamic = 'force-dynamic';
+
+const PhoneLink = nextDynamic(() => import('@/components/TrackingLinks').then(m => ({ default: m.PhoneLink })), { ssr: false });
+const OutboundLink = nextDynamic(() => import('@/components/TrackingLinks').then(m => ({ default: m.OutboundLink })), { ssr: false });
 
 const { listing, domain, displayName } = siteConfig;
 
@@ -37,7 +40,7 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function ShopPage({ params }) {
+export default async function ShopPage({ params }) {
   const shop = shops.find(s =>
     getStateSlug(s.s) === params.state &&
     getCitySlug(s.c) === params.city &&
@@ -45,6 +48,7 @@ export default function ShopPage({ params }) {
   );
   if (!shop) notFound();
 
+  const premium = await isPremium(shop.i);
   const stateName = stateNames[shop.s];
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.n + ' ' + shop.a)}`;
   const otherShops = shops.filter(s => s.c === shop.c && s.s === shop.s && s.i !== shop.i).slice(0, 4);
@@ -134,7 +138,17 @@ export default function ShopPage({ params }) {
               </div>
             )}
             {/* Hero header */}
-            <div style={{ background: 'linear-gradient(135deg, #0369A1 0%, #0284C7 100%)', padding: '28px 24px 22px' }}>
+            <div style={{ background: premium ? 'linear-gradient(135deg, #0C4A6E 0%, #075985 50%, #0369A1 100%)' : 'linear-gradient(135deg, #0369A1 0%, #0284C7 100%)', padding: '28px 24px 22px' }}>
+              {premium && (
+                <div style={{ display: 'flex', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
+                  <span style={{ background: '#F59E0B', color: '#0C1A2E', padding: '3px 12px', borderRadius: 20, fontSize: 12, fontWeight: 800, letterSpacing: 0.5 }}>
+                    ⭐ PREMIUM LISTING
+                  </span>
+                  <span style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '3px 12px', borderRadius: 20, fontSize: 12, fontWeight: 700 }}>
+                    ✓ Verified Business
+                  </span>
+                </div>
+              )}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14 }}>
                 <div>
                   <h1 style={{ fontSize: 26, fontWeight: 800, margin: '0 0 6px', color: '#fff', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>{shop.n}</h1>
@@ -278,6 +292,25 @@ export default function ShopPage({ params }) {
 
               {/* Quote form */}
               <QuoteForm shopName={shop.n} shopCity={shop.c} shopState={stateName} />
+
+              {/* Premium upgrade CTA — only shown for non-premium listings */}
+              {!premium && (
+                <div style={{ marginTop: 24, background: 'linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)', border: '1px solid #7DD3FC', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+                  <div style={{ fontSize: 20, marginBottom: 6 }}>⭐</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0C4A6E', margin: '0 0 6px' }}>
+                    Own {shop.n}?
+                  </h3>
+                  <p style={{ fontSize: 13, color: '#0369A1', margin: '0 0 14px', lineHeight: 1.5 }}>
+                    Upgrade to a Premium Listing — get a featured badge, top placement, and more leads for just $29/month.
+                  </p>
+                  <Link
+                    href={`/upgrade?shopId=${encodeURIComponent(shop.i)}&shopName=${encodeURIComponent(shop.n)}`}
+                    style={{ display: 'inline-block', background: '#0369A1', color: '#fff', padding: '10px 22px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontSize: 14 }}
+                  >
+                    Upgrade this listing →
+                  </Link>
+                </div>
+              )}
 
               {/* Customer reviews */}
               {shop.reviews && shop.reviews.length > 0 && (
