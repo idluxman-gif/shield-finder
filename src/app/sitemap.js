@@ -8,7 +8,7 @@ export default function sitemap() {
   const states = [...new Set(shops.map(s => s.s))];
 
   const stateUrls = states.map(stateCode => ({
-    url: `${domain}/${listingsRoute}/${getStateSlug(stateCode)}`,
+    url: `${domain}/${listingsRoute}/${getStateSlug(stateCode)}/`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -21,7 +21,7 @@ export default function sitemap() {
       const cityShopCount = shops.filter(s => s.s === stateCode && s.c === city).length;
       if (cityShopCount < 3) return;
       cityUrls.push({
-        url: `${domain}/${listingsRoute}/${getStateSlug(stateCode)}/${getCitySlug(city)}`,
+        url: `${domain}/${listingsRoute}/${getStateSlug(stateCode)}/${getCitySlug(city)}/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
