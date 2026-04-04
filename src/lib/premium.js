@@ -1,39 +1,49 @@
 /**
  * Premium shop state helpers using Vercel KV.
  * Key pattern: premium:sf:{shopId}
- * Value: { subscriptionId, email, since, active }
+ * Value: { paymentId, email, since, expiresAt, active }
+ *
+ * Payoneer doesn't have native recurring billing, so we track a 32-day
+ * expiry. When the listing expires the upgrade CTA reappears so the owner
+ * can renew for another month.
  */
 
 const KV_PREFIX = 'premium:sf';
+const PREMIUM_DAYS = 32;
 
-async function kv() {
+async function getKv() {
   const { kv } = await import('@vercel/kv');
   return kv;
 }
 
 export async function isPremium(shopId) {
   try {
-    const store = await kv();
+    const store = await getKv();
     const record = await store.get(`${KV_PREFIX}:${shopId}`);
-    return record?.active === true;
+    if (!record?.active) return false;
+    if (record.expiresAt && new Date(record.expiresAt) < new Date()) return false;
+    return true;
   } catch {
     return false;
   }
 }
 
-export async function setPremium(shopId, { subscriptionId, email }) {
-  const store = await kv();
+export async function setPremium(shopId, { paymentId, email }) {
+  const store = await getKv();
+  const since = new Date().toISOString();
+  const expiresAt = new Date(Date.now() + PREMIUM_DAYS * 24 * 60 * 60 * 1000).toISOString();
   await store.set(`${KV_PREFIX}:${shopId}`, {
-    subscriptionId,
+    paymentId,
     email,
-    since: new Date().toISOString(),
+    since,
+    expiresAt,
     active: true,
   });
 }
 
 export async function revokePremium(shopId) {
   try {
-    const store = await kv();
+    const store = await getKv();
     const existing = await store.get(`${KV_PREFIX}:${shopId}`);
     if (existing) {
       await store.set(`${KV_PREFIX}:${shopId}`, { ...existing, active: false });
@@ -45,7 +55,7 @@ export async function revokePremium(shopId) {
 
 export async function getPremiumRecord(shopId) {
   try {
-    const store = await kv();
+    const store = await getKv();
     return await store.get(`${KV_PREFIX}:${shopId}`);
   } catch {
     return null;

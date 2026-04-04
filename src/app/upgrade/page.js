@@ -114,7 +114,7 @@ function UpgradeForm() {
         </button>
 
         <p style={{ fontSize: 12, color: '#9CA3AF', textAlign: 'center', margin: '12px 0 0' }}>
-          Secure payment via Stripe · Cancel anytime
+          Secure payment via Payoneer · Renew monthly · Cancel anytime
         </p>
       </div>
 
