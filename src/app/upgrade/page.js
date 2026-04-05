@@ -9,20 +9,14 @@ function UpgradeForm() {
   const shopId = params.get('shopId');
   const shopName = params.get('shopName') || '';
   const cancelled = params.get('cancelled');
+  const success = params.get('success');
 
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleCheckout() {
     if (!shopId) {
       setError('No shop selected. Please use the upgrade link from your listing page.');
-      return;
-    }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError('Please enter a valid email address.');
       return;
     }
     setLoading(true);
@@ -31,37 +25,39 @@ function UpgradeForm() {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ shopId, shopName, ownerEmail: email }),
+        body: JSON.stringify({ shopId, shopName }),
       });
       const data = await res.json();
-      if (data.success) {
-        setSubmitted(true);
+      if (data.success && data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
       } else {
-        setError(data.error || 'Failed to submit request. Please try again.');
+        setError(data.error || 'Failed to start checkout. Please try again.');
+        setLoading(false);
       }
     } catch {
       setError('Network error. Please try again.');
-    } finally {
       setLoading(false);
     }
   }
 
-  if (submitted) {
+  if (success) {
     return (
       <div style={{ maxWidth: 520, margin: '60px auto', padding: '0 24px', textAlign: 'center' }}>
-        <div style={{ fontSize: 56, marginBottom: 12 }}>📬</div>
-        <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0C1A2E', margin: '0 0 12px' }}>Request received!</h2>
+        <div style={{ fontSize: 56, marginBottom: 12 }}>🎉</div>
+        <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0C1A2E', margin: '0 0 12px' }}>Payment successful!</h2>
         <p style={{ fontSize: 16, color: '#475569', margin: '0 0 24px', lineHeight: 1.6 }}>
-          We&apos;ll send a <strong>$29 Payoneer payment request</strong> to <strong>{email}</strong> within a few hours.
-          Once you complete the payment, your listing upgrades within 1 hour.
+          Your premium listing for <strong>{decodeURIComponent(shopName)}</strong> is now active.
+          It may take up to a few minutes to appear on the site.
         </p>
         <div style={{ background: '#F0F9FF', border: '1px solid #BAE6FD', borderRadius: 10, padding: 20, textAlign: 'left' }}>
-          <p style={{ margin: 0, fontSize: 14, color: '#0C4A6E', fontWeight: 600 }}>What to expect:</p>
-          <ol style={{ margin: '8px 0 0', paddingLeft: 20, color: '#0C4A6E', fontSize: 14, lineHeight: 2 }}>
-            <li>Payment request arrives in your inbox via Payoneer</li>
-            <li>Pay $29 — takes ~2 minutes</li>
-            <li>Your listing upgrades within 1 hour</li>
-          </ol>
+          <p style={{ margin: 0, fontSize: 14, color: '#0C4A6E', fontWeight: 600 }}>Your Premium benefits:</p>
+          <ul style={{ margin: '8px 0 0', paddingLeft: 20, color: '#0C4A6E', fontSize: 14, lineHeight: 2 }}>
+            <li>Featured badge on your listing</li>
+            <li>Top placement in city search results</li>
+            <li>&quot;Verified Business&quot; callout</li>
+            <li>Prominent direct contact form</li>
+            <li>Enhanced listing with more details</li>
+          </ul>
         </div>
         <Link href="/" style={{ display: 'inline-block', marginTop: 24, color: '#0369A1', fontWeight: 600, textDecoration: 'none' }}>
           Back to directory
@@ -84,7 +80,7 @@ function UpgradeForm() {
 
       {cancelled && (
         <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 8, padding: 14, marginBottom: 20, color: '#DC2626', fontSize: 14 }}>
-          Your request was cancelled — no charge was made.
+          Checkout was cancelled — no charge was made.
         </div>
       )}
 
@@ -119,60 +115,33 @@ function UpgradeForm() {
           ))}
         </ul>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 14 }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-              Your email address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-              style={{
-                width: '100%',
-                padding: '11px 14px',
-                border: '1px solid #D1D5DB',
-                borderRadius: 8,
-                fontSize: 15,
-                outline: 'none',
-                boxSizing: 'border-box',
-              }}
-            />
-            <p style={{ fontSize: 12, color: '#9CA3AF', margin: '5px 0 0' }}>
-              We&apos;ll send your Payoneer payment request here.
-            </p>
+        {error && (
+          <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 6, padding: 10, marginBottom: 14, color: '#DC2626', fontSize: 13 }}>
+            {error}
           </div>
+        )}
 
-          {error && (
-            <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 6, padding: 10, marginBottom: 14, color: '#DC2626', fontSize: 13 }}>
-              {error}
-            </div>
-          )}
+        <button
+          onClick={handleCheckout}
+          disabled={loading || !shopId}
+          style={{
+            width: '100%',
+            background: loading ? '#9CA3AF' : '#0369A1',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 10,
+            padding: '14px 24px',
+            fontSize: 16,
+            fontWeight: 700,
+            cursor: loading || !shopId ? 'not-allowed' : 'pointer',
+          }}
+        >
+          {loading ? 'Redirecting to checkout...' : 'Upgrade to Premium — $29/mo →'}
+        </button>
 
-          <button
-            type="submit"
-            disabled={loading || !shopId}
-            style={{
-              width: '100%',
-              background: loading ? '#9CA3AF' : '#0369A1',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 10,
-              padding: '14px 24px',
-              fontSize: 16,
-              fontWeight: 700,
-              cursor: loading || !shopId ? 'not-allowed' : 'pointer',
-            }}
-          >
-            {loading ? 'Submitting...' : 'Request Premium Upgrade →'}
-          </button>
-
-          <p style={{ fontSize: 12, color: '#9CA3AF', textAlign: 'center', margin: '10px 0 0' }}>
-            Payment via Payoneer · $29/month · Cancel anytime
-          </p>
-        </form>
+        <p style={{ fontSize: 12, color: '#9CA3AF', textAlign: 'center', margin: '10px 0 0' }}>
+          Secure payment via Lemon Squeezy · Cancel anytime
+        </p>
       </div>
 
       {!shopId && (
