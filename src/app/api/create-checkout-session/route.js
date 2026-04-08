@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
 
 /**
- * Premium upgrade — Lemon Squeezy checkout session.
+ * Premium upgrade — Paddle checkout session (replaces Lemon Squeezy).
  *
- * Creates a Lemon Squeezy checkout URL for $29/month premium listing.
- * Custom data (shopId, shopName) is passed through so the webhook
- * can activate premium on the correct listing.
+ * Creates a Paddle transaction checkout URL for $29/month premium listing.
+ * custom_data (shop_id, shop_name) flows through to the webhook handler.
  */
 
 export async function POST(request) {
@@ -16,43 +15,31 @@ export async function POST(request) {
       return NextResponse.json({ error: 'shopId and shopName are required' }, { status: 400 });
     }
 
-    const apiKey = process.env.LEMONSQUEEZY_API_KEY;
-    const storeId = process.env.LEMONSQUEEZY_STORE_ID;
-    const variantId = process.env.LEMONSQUEEZY_VARIANT_ID;
+    const apiKey = process.env.PADDLE_API_KEY;
+    const priceId = process.env.PADDLE_PRICE_ID;
 
-    if (!apiKey || !storeId || !variantId) {
-      console.error('[checkout] missing env vars');
+    if (!apiKey || !priceId) {
+      console.error('[checkout] missing Paddle env vars');
       return NextResponse.json({ error: 'Payment service not configured' }, { status: 500 });
     }
 
     const origin = request.headers.get('origin') || 'https://www.shieldfinder.com';
 
-    const res = await fetch('https://api.lemonsqueezy.com/v1/checkouts', {
+    const res = await fetch('https://api.paddle.com/transactions', {
       method: 'POST',
       headers: {
-        Accept: 'application/vnd.api+json',
-        'Content-Type': 'application/vnd.api+json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        data: {
-          type: 'checkouts',
-          attributes: {
-            checkout_data: {
-              custom: {
-                shop_id: shopId,
-                shop_name: shopName,
-                site: 'shieldfinder',
-              },
-            },
-            product_options: {
-              redirect_url: `${origin}/upgrade?success=true&shopId=${encodeURIComponent(shopId)}&shopName=${encodeURIComponent(shopName)}`,
-            },
-          },
-          relationships: {
-            store: { data: { type: 'stores', id: storeId } },
-            variant: { data: { type: 'variants', id: variantId } },
-          },
+        items: [{ price_id: priceId, quantity: 1 }],
+        custom_data: {
+          shop_id: shopId,
+          shop_name: shopName,
+          site: 'shieldfinder',
+        },
+        checkout: {
+          url: `${origin}/upgrade?success=true&shopId=${encodeURIComponent(shopId)}&shopName=${encodeURIComponent(shopName)}`,
         },
       }),
     });
@@ -60,13 +47,13 @@ export async function POST(request) {
     const data = await res.json();
 
     if (!res.ok) {
-      console.error('[checkout] LS API error:', JSON.stringify(data));
+      console.error('[checkout] Paddle API error:', JSON.stringify(data));
       return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 });
     }
 
-    const checkoutUrl = data.data?.attributes?.url;
+    const checkoutUrl = data.data?.checkout?.url;
     if (!checkoutUrl) {
-      console.error('[checkout] no URL in response:', JSON.stringify(data));
+      console.error('[checkout] no URL in Paddle response:', JSON.stringify(data));
       return NextResponse.json({ error: 'Failed to create checkout URL' }, { status: 500 });
     }
 
