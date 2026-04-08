@@ -140,7 +140,7 @@ function UpgradeForm() {
         </button>
 
         <p style={{ fontSize: 12, color: '#9CA3AF', textAlign: 'center', margin: '10px 0 0' }}>
-          Secure payment via Lemon Squeezy · Cancel anytime
+          Secure payment via Paddle · Cancel anytime
         </p>
       </div>
 
