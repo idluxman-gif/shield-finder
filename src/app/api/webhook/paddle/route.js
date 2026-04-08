@@ -30,7 +30,6 @@ function verifyPaddleSignature(rawBody, signatureHeader, secret) {
   const h1 = parts.h1;
   if (!ts || !h1) return false;
 
-  // Check timestamp is recent
   const now = Math.floor(Date.now() / 1000);
   if (Math.abs(now - parseInt(ts, 10)) > MAX_VALID_TIME) return false;
 
@@ -75,7 +74,6 @@ export async function POST(request) {
       return NextResponse.json({ received: true });
     }
 
-    // Only process events for this site
     if (customData.site && customData.site !== 'shieldfinder') {
       console.log(`[paddle-webhook] ignoring event for site=${customData.site}`);
       return NextResponse.json({ received: true });
