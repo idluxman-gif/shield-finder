@@ -1,14 +1,51 @@
 import { NextResponse } from 'next/server';
-import { setPremium, revokePremium } from '@/lib/premium';
 
 /**
- * Gumroad webhook handler for ShieldFinder.
+ * Gumroad webhook hub — handles BOTH ShieldFinder and ScratchAndDentGuide.
+ *
+ * Gumroad only supports a single "Ping" endpoint, so this handler acts as
+ * the central webhook receiver for both sites. It writes directly to Vercel KV
+ * using the correct prefix based on the `site` custom field:
+ *   - site=shieldfinder  → premium:sf:{shopId}
+ *   - site=scratchanddent → premium:sad:{shopId}
  *
  * Gumroad sends POST requests with form-encoded data.
- * Events: sale (resource_name=sale), subscription cancellation, etc.
- *
  * Custom fields passed through checkout: shop_id, shop_name, site
  */
+
+const PREMIUM_DAYS = 32;
+
+const SITE_PREFIX = {
+  shieldfinder: 'premium:sf',
+  scratchanddent: 'premium:sad',
+};
+
+async function getKv() {
+  const { kv } = await import('@vercel/kv');
+  return kv;
+}
+
+async function activatePremium(kvPrefix, shopId, { paymentId, email }) {
+  const store = await getKv();
+  const since = new Date().toISOString();
+  const expiresAt = new Date(Date.now() + PREMIUM_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  await store.set(`${kvPrefix}:${shopId}`, {
+    paymentId,
+    email,
+    ownerEmail: null,
+    since,
+    expiresAt,
+    active: true,
+  });
+}
+
+async function deactivatePremium(kvPrefix, shopId) {
+  const store = await getKv();
+  const existing = await store.get(`${kvPrefix}:${shopId}`);
+  if (existing) {
+    await store.set(`${kvPrefix}:${shopId}`, { ...existing, active: false });
+  }
+}
 
 export async function POST(request) {
   try {
@@ -32,28 +69,28 @@ export async function POST(request) {
     const cancelled = formData.get('cancelled') === 'true';
     const refunded = formData.get('refunded') === 'true';
 
-    console.log(`[gumroad-webhook] resource=${resourceName} shopId=${shopId} sale=${saleId} sub=${subscriptionId} cancelled=${cancelled}`);
+    console.log(`[gumroad-webhook] resource=${resourceName} site=${site} shopId=${shopId} sale=${saleId} sub=${subscriptionId} cancelled=${cancelled}`);
 
     if (!shopId) {
       console.warn('[gumroad-webhook] no shop_id in custom fields');
       return NextResponse.json({ received: true });
     }
 
-    // Only process events for this site
-    if (site && site !== 'shieldfinder') {
-      console.log(`[gumroad-webhook] ignoring event for site=${site}`);
+    const kvPrefix = SITE_PREFIX[site];
+    if (!kvPrefix) {
+      console.warn(`[gumroad-webhook] unknown site: ${site}`);
       return NextResponse.json({ received: true });
     }
 
     if (cancelled || refunded) {
-      await revokePremium(shopId);
-      console.log(`[gumroad-webhook] premium revoked: shopId=${shopId}`);
+      await deactivatePremium(kvPrefix, shopId);
+      console.log(`[gumroad-webhook] premium revoked: site=${site} shopId=${shopId}`);
     } else {
-      await setPremium(shopId, {
+      await activatePremium(kvPrefix, shopId, {
         paymentId: `gumroad-${subscriptionId || saleId}`,
         email,
       });
-      console.log(`[gumroad-webhook] premium activated: shopId=${shopId}`);
+      console.log(`[gumroad-webhook] premium activated: site=${site} shopId=${shopId}`);
     }
 
     return NextResponse.json({ received: true });
