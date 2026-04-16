@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site';
 import PageNav from '@/components/PageNav';
 import ShopListClient from '@/components/ShopListClient';
 import { Suspense } from 'react';
+import { isPremium } from '@/lib/premium';
 
 const TIER_CONFIG = {
   '$':   { bg: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)', accent: '#94A3B8', label: '$ Budget' },
@@ -47,7 +48,7 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function CityPage({ params }) {
+export default async function CityPage({ params }) {
   const stateCode = findStateCode(params.state);
   if (!stateCode) notFound();
   const stateName = stateNames[stateCode];
@@ -56,6 +57,9 @@ export default function CityPage({ params }) {
     .sort((a, b) => b.v - a.v);
   if (cityShops.length === 0) notFound();
   const cityName = cityShops[0].c;
+
+  const premiumChecks = await Promise.all(cityShops.map(s => isPremium(s.i)));
+  const premiumShopIds = cityShops.filter((s, idx) => premiumChecks[idx]).map(s => s.i);
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#F0F9FF', minHeight: '100vh' }}>
@@ -82,7 +86,7 @@ export default function CityPage({ params }) {
       </div>
 
       <Suspense>
-        <ShopListClient shops={cityShops} />
+        <ShopListClient shops={cityShops} premiumShopIds={premiumShopIds} />
       </Suspense>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>

@@ -6,6 +6,7 @@ import { siteConfig } from '@/config/site';
 import PageNav from '@/components/PageNav';
 import ShopListClient from '@/components/ShopListClient';
 import { Suspense } from 'react';
+import { isPremium } from '@/lib/premium';
 
 const { listing, domain, displayName } = siteConfig;
 
@@ -26,12 +27,15 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function StatePage({ params }) {
+export default async function StatePage({ params }) {
   const stateCode = findStateCode(params.state);
   if (!stateCode) notFound();
   const stateName = stateNames[stateCode];
   const cityEntries = getShopsByCity(stateCode);
   const stateShops = shops.filter(s => s.s === stateCode).sort((a, b) => b.v - a.v);
+
+  const premiumChecks = await Promise.all(stateShops.map(s => isPremium(s.i)));
+  const premiumShopIds = stateShops.filter((s, idx) => premiumChecks[idx]).map(s => s.i);
 
   const itemListLd = {
     "@context": "https://schema.org",
@@ -101,7 +105,7 @@ export default function StatePage({ params }) {
         </div>
 
         <Suspense>
-          <ShopListClient shops={stateShops} />
+          <ShopListClient shops={stateShops} premiumShopIds={premiumShopIds} />
         </Suspense>
 
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>

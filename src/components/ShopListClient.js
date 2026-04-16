@@ -22,7 +22,7 @@ const SORT_OPTIONS = [
   { value: 'price_asc', label: 'Price: Low → High' },
 ];
 
-export default function ShopListClient({ shops, title }) {
+export default function ShopListClient({ shops, title, premiumShopIds = [] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -51,6 +51,7 @@ export default function ShopListClient({ shops, title }) {
   }, [router, pathname]);
 
   const filtered = useMemo(() => {
+    const premiumSet = new Set(premiumShopIds);
     let list = [...shops];
     if (ins) list = list.filter(s => s.ins);
     if (mob) list = list.filter(s => s.mob);
@@ -60,8 +61,12 @@ export default function ShopListClient({ shops, title }) {
     if (sort === 'reviews') list.sort((a, b) => b.v - a.v);
     else if (sort === 'price_asc') list.sort((a, b) => (a.pr || '$$').localeCompare(b.pr || '$$'));
     else list.sort((a, b) => b.r - a.r || b.v - a.v);
+    // Premium shops always appear first (stable sort)
+    list.sort((a, b) => (premiumSet.has(b.i) ? 1 : 0) - (premiumSet.has(a.i) ? 1 : 0));
     return list;
-  }, [shops, ins, mob, minRating, price, sort]);
+  }, [shops, premiumShopIds, ins, mob, minRating, price, sort]);
+
+  const premiumSet = useMemo(() => new Set(premiumShopIds), [premiumShopIds]);
 
   const activeFilterCount = [ins, mob, minRating, price].filter(Boolean).length;
 
@@ -190,9 +195,15 @@ export default function ShopListClient({ shops, title }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
             {filtered.map((shop, idx) => {
               const tier = TIER_CONFIG[shop.pr] || TIER_CONFIG['$$'];
+              const premium = premiumSet.has(shop.i);
               return (
                 <Link key={shop.i} href={getShopPath(shop)}
-                  style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', textDecoration: 'none', color: 'inherit', border: '1px solid #BAE6FD' }}>
+                  style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', textDecoration: 'none', color: 'inherit', border: premium ? '2px solid #0369A1' : '1px solid #BAE6FD' }}>
+                  {premium && (
+                    <div style={{ background: '#0369A1', color: '#fff', fontSize: 10, fontWeight: 700, textAlign: 'center', padding: '4px 0', letterSpacing: '0.06em' }}>
+                      ★ FEATURED LISTING
+                    </div>
+                  )}
                   <div style={{ background: tier.bg, height: 90, display: 'flex', alignItems: 'center', padding: '0 16px', gap: 14, position: 'relative', overflow: 'hidden' }}>
                     <div style={{ width: 48, height: 48, borderRadius: 12, flexShrink: 0, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 19, fontWeight: 900, color: '#fff', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", letterSpacing: '-0.5px' }}>
                       {getInitials(shop.n)}
@@ -210,7 +221,7 @@ export default function ShopListClient({ shops, title }) {
                     <span style={{ position: 'absolute', bottom: 7, right: 10, color: tier.accent, fontSize: 9, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                       {tier.label}
                     </span>
-                    {idx === 0 && (
+                    {!premium && idx === 0 && (
                       <span style={{ position: 'absolute', top: 8, right: 8, background: '#F59E0B', color: '#fff', padding: '2px 7px', borderRadius: 8, fontSize: 10, fontWeight: 700 }}>★ Top Rated</span>
                     )}
                   </div>

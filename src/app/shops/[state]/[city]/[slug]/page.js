@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import PageNav from '@/components/PageNav';
 import nextDynamic from 'next/dynamic';
 import QuoteForm from './QuoteForm';
+import PremiumLeadForm from './PremiumLeadForm';
 import { isPremium } from '@/lib/premium';
 
 export const dynamic = 'force-dynamic';
@@ -126,7 +127,12 @@ export default async function ShopPage({ params }) {
           </div>
 
           {/* Shop hero card */}
-          <div style={{ background: '#fff', borderRadius: 18, overflow: 'hidden', border: '1px solid #BAE6FD', marginBottom: 24 }}>
+          <div style={{ background: '#fff', borderRadius: 18, overflow: 'hidden', border: premium ? '2px solid #0369A1' : '1px solid #BAE6FD', marginBottom: 24 }}>
+            {premium && (
+              <div style={{ background: '#0369A1', color: '#fff', fontSize: 12, fontWeight: 700, textAlign: 'center', padding: '6px 0', letterSpacing: '0.06em' }}>
+                ★ FEATURED LISTING — Premium Partner
+              </div>
+            )}
             {/* Store photo */}
             {shop.img && (
               <div style={{ width: '100%', height: 220, overflow: 'hidden', position: 'relative' }}>
@@ -290,26 +296,33 @@ export default async function ShopPage({ params }) {
                 </p>
               </div>
 
-              {/* Quote form */}
-              <QuoteForm shopName={shop.n} shopCity={shop.c} shopState={stateName} />
-
-              {/* Premium upgrade CTA — only shown for non-premium listings */}
-              {!premium && (
-                <div style={{ marginTop: 24, background: 'linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)', border: '1px solid #7DD3FC', borderRadius: 12, padding: 20, textAlign: 'center' }}>
-                  <div style={{ fontSize: 20, marginBottom: 6 }}>⭐</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0C4A6E', margin: '0 0 6px' }}>
-                    Own {shop.n}?
-                  </h3>
-                  <p style={{ fontSize: 13, color: '#0369A1', margin: '0 0 14px', lineHeight: 1.5 }}>
-                    Upgrade to a Premium Listing — get a featured badge, top placement, and more leads for just $29/month.
-                  </p>
-                  <Link
-                    href={`/upgrade?shopId=${encodeURIComponent(shop.i)}&shopName=${encodeURIComponent(shop.n)}`}
-                    style={{ display: 'inline-block', background: '#0369A1', color: '#fff', padding: '10px 22px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontSize: 14 }}
-                  >
-                    Upgrade this listing →
-                  </Link>
+              {/* Lead form — premium gets dedicated PremiumLeadForm, others get generic QuoteForm */}
+              {premium ? (
+                <div style={{ marginBottom: 24 }}>
+                  <PremiumLeadForm
+                    shopName={shop.n}
+                    shopCity={shop.c}
+                    shopState={stateName}
+                    shopSlug={getShopSlug(shop)}
+                    shopIndex={shop.i}
+                  />
                 </div>
+              ) : (
+                <>
+                  <QuoteForm shopName={shop.n} shopCity={shop.c} shopState={stateName} />
+
+                  {/* Claim Your Listing CTA */}
+                  <div style={{ background: '#E0F2FE', border: '1px dashed #0369A1', borderRadius: 12, padding: '16px 20px', marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#0C4A6E', marginBottom: 2 }}>🏆 Is this your shop?</div>
+                      <div style={{ fontSize: 13, color: '#0369A1' }}>Claim your listing to get a Featured badge, top placement, and a dedicated lead form.</div>
+                    </div>
+                    <Link href={`/claim/${getShopSlug(shop)}`}
+                      style={{ background: '#0369A1', color: '#fff', padding: '10px 18px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontSize: 13, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                      Claim Your Listing →
+                    </Link>
+                  </div>
+                </>
               )}
 
               {/* Customer reviews */}
