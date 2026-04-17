@@ -36,6 +36,52 @@ const blogPreviews = [
   { slug: 'chip-repair-vs-windshield-replacement', title: 'Chip Repair vs. Windshield Replacement: Which Do You Need?', date: 'Mar 10, 2026' },
 ];
 
+// ── FAQ Data ─────────────────────────────────────────────────────────────────
+const faqs = [
+  {
+    q: 'How do I find the best auto glass shop near me?',
+    a: 'Start by filtering for AGSC-certified shops — the Auto Glass Safety Council certifies technicians on proper installation, which is a life-safety issue. Read reviews that specifically mention ADAS calibration work if your car is 2018 or newer. Look for shops that offer both OEM and aftermarket glass options so you can choose, and insist on a written warranty covering leaks and workmanship. Avoid any shop without a physical street address — that usually signals a lead broker, not a real installer.',
+  },
+  {
+    q: 'What does windshield replacement cost?',
+    a: 'For a standard vehicle without driver-assist sensors, replacement typically runs $300–$500 installed. Add ADAS recalibration and the total usually lands between $500 and $1,000+, sometimes higher for luxury vehicles. Prices trend higher in coastal states like California and New York and lower across the Midwest. If the damage is small, a chip repair is dramatically cheaper at $60–$150 and is often covered by insurance with no deductible.',
+  },
+  {
+    q: 'Does insurance cover auto glass repair?',
+    a: 'If you carry comprehensive coverage, glass damage is almost always covered. Most insurers waive the deductible entirely for chip repair because it is cheaper than a full replacement down the road. For full replacement, your normal comprehensive deductible typically applies — except in a handful of zero-deductible states like Florida, Kentucky, and South Carolina, where state law or policy language requires insurers to cover glass replacement with no out-of-pocket cost.',
+  },
+  {
+    q: 'What\u2019s the difference between repair and replacement?',
+    a: 'Chips smaller than a quarter and cracks under six inches are usually repairable with resin injection, which restores structural integrity and stops the crack from spreading. Replacement is required when damage sits in the driver\u2019s direct line of sight, reaches the edge of the windshield (which weakens the bond to the frame), or penetrates deeper than the outer glass layer into the plastic interlayer. A qualified tech will tell you honestly which category you fall into.',
+  },
+  {
+    q: 'How long does windshield replacement take?',
+    a: 'The physical install takes 30–60 minutes for most vehicles. What matters more is the safe-drive-away time, which depends on the urethane adhesive the shop uses. Fast-cure adhesives let you drive in about one hour. Standard-cure urethane requires 4 to 24 hours before the bond is strong enough to protect you in a crash or airbag deployment. Always ask the shop which adhesive they use before booking the appointment.',
+  },
+  {
+    q: 'What is ADAS recalibration?',
+    a: 'Most cars built since 2018 have a forward-facing camera mounted behind the windshield that powers lane-keep assist, automatic emergency braking, and adaptive cruise control. When the windshield is replaced, that camera\u2019s aim shifts by fractions of a degree — enough to make the safety systems unreliable or dangerous. Recalibration (static, dynamic, or both) realigns the sensors. Skipping it is not optional on modern vehicles. It adds $150–$400 to the total.',
+  },
+  {
+    q: 'How do I file an auto glass insurance claim?',
+    a: 'Call your insurer directly or open a claim in their mobile app. Be aware that many insurers route glass claims through Safelite Solutions — when you call the "glass claims line," the person answering often works for Safelite, not your insurer. You are not required to use them. Anti-steering laws in most states guarantee your right to choose any qualified shop, including AGSC-certified independents. Just tell the claims rep which shop you\u2019ve selected.',
+  },
+  {
+    q: 'Are mobile auto glass services reliable?',
+    a: 'Mobile service is genuinely convenient and works well for standard replacements in mild weather. The limitations are real, though: extreme heat or cold below freezing affects how urethane adhesive cures, which impacts the bond strength. Some ADAS systems also require static recalibration performed in a shop with targets and controlled lighting — mobile vans can handle dynamic calibration but not static. Confirm ADAS capability and weather conditions with the shop before booking mobile.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 // ── SVG Windshield Illustration ──────────────────────────────────────────────
 const WindshieldSVG = () => (
   <svg width="420" height="300" viewBox="0 0 420 300" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: '100%' }}>
@@ -303,6 +349,34 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
+      <div style={{ background: "#F0F9FF", borderTop: "1px solid #BAE6FD", padding: "48px 24px" }}>
+        <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: "#0C1A2E", margin: "0 0 8px", fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
+            Frequently Asked Questions
+          </h2>
+          <p style={{ fontSize: 14, color: "#64748B", margin: "0 0 24px" }}>
+            Straight answers about auto glass repair, cost, insurance, and how to pick a shop.
+          </p>
+          <div style={{ display: "grid", gap: 12 }}>
+            {faqs.map((f, i) => (
+              <details key={i} style={{ background: "#fff", border: "1px solid #BAE6FD", borderRadius: 12, padding: "14px 18px", transition: "border-color .15s" }}>
+                <summary style={{ cursor: "pointer", fontSize: 15, fontWeight: 700, color: "#0C1A2E", listStyle: "none", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
+                  <span>{f.q}</span>
+                  <span aria-hidden="true" style={{ color: "#0369A1", fontSize: 18, fontWeight: 700, flexShrink: 0 }}>+</span>
+                </summary>
+                <p style={{ margin: "10px 0 2px", fontSize: 14, color: "#374151", lineHeight: 1.7 }}>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
       <footer style={{ background: "#082F49", padding: "32px 24px", color: "rgba(255,255,255,0.6)", fontSize: 13 }}>

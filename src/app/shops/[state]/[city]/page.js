@@ -6,6 +6,7 @@ import PageNav from '@/components/PageNav';
 import ShopListClient from '@/components/ShopListClient';
 import { Suspense } from 'react';
 import { isPremium } from '@/lib/premium';
+import { cityEditorial } from '@/data/cityEditorial';
 
 const TIER_CONFIG = {
   '$':   { bg: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)', accent: '#94A3B8', label: '$ Budget' },
@@ -61,6 +62,8 @@ export default async function CityPage({ params }) {
   const premiumChecks = await Promise.all(cityShops.map(s => isPremium(s.i)));
   const premiumShopIds = cityShops.filter((s, idx) => premiumChecks[idx]).map(s => s.i);
 
+  const editorial = cityEditorial[`${stateCode}-${cityName}`];
+
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#F0F9FF', minHeight: '100vh' }}>
       <PageNav />
@@ -81,6 +84,15 @@ export default async function CityPage({ params }) {
         <p style={{ color: '#64748B', fontSize: 15, margin: '0 0 28px' }}>
           {cityShops.length} verified {cityShops.length === 1 ? listing.singular : listing.plural}. {listing.metaSavings}
         </p>
+
+        {/* Editorial intro block */}
+        {editorial && (
+          <div style={{ background: 'white', border: '1px solid #BAE6FD', borderRadius: 12, padding: '24px 28px', marginBottom: 36 }}>
+            {editorial.split('\n\n').map((paragraph, i) => (
+              <p key={i} style={{ margin: '0 0 16px', lineHeight: 1.7, color: '#334155', fontSize: 15 }} dangerouslySetInnerHTML={{ __html: paragraph }} />
+            ))}
+          </div>
+        )}
 
         {/* Shop cards — with filter/sort */}
       </div>

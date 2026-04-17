@@ -31,6 +31,8 @@ const CATEGORY_COLORS = {
   'ADAS & Technology': { bg: '#EDE9FE', color: '#6D28D9' },
   'Mobile Service': { bg: '#FCE7F3', color: '#9D174D' },
   'Service & Scheduling': { bg: '#FFEDD5', color: '#9A3412' },
+  'Local Guides': { bg: '#DBEAFE', color: '#1E40AF' },
+  'City Guides': { bg: '#DBEAFE', color: '#1E40AF' },
 };
 
 export default function BlogIndexPage() {
