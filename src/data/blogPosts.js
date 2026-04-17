@@ -52,13 +52,13 @@ export const blogPosts = [
 
 <h3>5. Labor and Installation</h3>
 <p>Labor is usually bundled into the total quote, but it's worth understanding what it covers. A standard replacement takes 60–90 minutes. The technician removes the old glass, cleans the pinchweld (the metal frame), applies fresh urethane adhesive, sets the new glass, and lets it cure. Drive-away time is typically 1–3 hours after installation.</p>
-<p>Regional labor rates vary — shops in major metros like <a href="/shops/california">California</a> or <a href="/shops/new-york">New York</a> generally charge more than shops in <a href="/shops/texas">Texas</a> or <a href="/shops/georgia">Georgia</a>.</p>
+<p>Regional labor rates vary — shops in major metros like <a href="/shops/ca">California</a> or <a href="/shops/ny">New York</a> generally charge more than shops in <a href="/shops/tx">Texas</a> or <a href="/shops/ga">Georgia</a>.</p>
 
 <h2>How Insurance Changes the Math</h2>
 <p>If you have comprehensive coverage on your vehicle, your insurance may cover all or most of your windshield replacement cost. Comprehensive coverage (not collision) applies because windshield damage is typically caused by road debris, hail, or vandalism — not at-fault accidents.</p>
 
 <h3>Zero-Deductible States</h3>
-<p>Six states currently mandate that insurers offer zero-deductible windshield replacement under comprehensive coverage: <strong>Florida, Arizona, Kentucky, South Carolina, Massachusetts, and New York</strong>. In these states, qualifying policyholders pay nothing out of pocket. If you're in <a href="/shops/florida">Florida</a> or <a href="/shops/arizona">Arizona</a>, make sure your insurer knows about the zero-deductible law before you pay anything.</p>
+<p>Six states currently mandate that insurers offer zero-deductible windshield replacement under comprehensive coverage: <strong>Florida, Arizona, Kentucky, South Carolina, Massachusetts, and New York</strong>. In these states, qualifying policyholders pay nothing out of pocket. If you're in <a href="/shops/fl">Florida</a> or <a href="/shops/az">Arizona</a>, make sure your insurer knows about the zero-deductible law before you pay anything.</p>
 
 <h3>Standard Deductible Applies</h3>
 <p>In most other states, your comprehensive deductible applies. If your deductible is $500 and the replacement costs $350, paying out of pocket makes more financial sense than filing a claim that won't be covered anyway. The general rule: if the replacement cost is less than your deductible, just pay cash.</p>
@@ -105,12 +105,12 @@ export const blogPosts = [
 <h2>Zero-Deductible States — Where You Pay Nothing</h2>
 <p>Six states require insurers to offer windshield replacement with no deductible under comprehensive coverage:</p>
 <ul>
-  <li><strong><a href="/shops/florida">Florida</a></strong> — F.S. 627.728 mandates no-deductible coverage for full replacements</li>
-  <li><strong><a href="/shops/arizona">Arizona</a></strong> — A.R.S. 20-263 requires zero-deductible glass coverage if comprehensive is carried</li>
+  <li><strong><a href="/shops/fl">Florida</a></strong> — F.S. 627.728 mandates no-deductible coverage for full replacements</li>
+  <li><strong><a href="/shops/az">Arizona</a></strong> — A.R.S. 20-263 requires zero-deductible glass coverage if comprehensive is carried</li>
   <li><strong>Kentucky</strong> — KRS 304.39-320 covers glass with no deductible</li>
   <li><strong>South Carolina</strong></li>
   <li><strong>Massachusetts</strong> — Glass coverage deductible is capped at $100</li>
-  <li><strong>New York</strong> — <a href="/shops/new-york">New York</a> limits glass deductibles for comprehensive policies</li>
+  <li><strong>New York</strong> — <a href="/shops/ny">New York</a> limits glass deductibles for comprehensive policies</li>
 </ul>
 <p>If you live in one of these states and your insurer is charging a deductible on a windshield claim, push back — they may be required by law to waive it.</p>
 
@@ -198,7 +198,7 @@ export const blogPosts = [
 
 <h2>When Waiting Makes Things Worse</h2>
 <p>Temperature changes are the enemy of a repairable chip. When a chip exists in the glass, small changes in pressure — from parking in the sun, blasting your defroster, or even a cold snap — stress the glass at the chip site. What was a half-inch bull's-eye on Monday can become a six-inch crack by Friday.</p>
-<p>If you have a fresh chip, get it evaluated within a week. If you're in a cold-weather state like <a href="/shops/illinois">Illinois</a>, <a href="/shops/colorado">Colorado</a>, or <a href="/shops/washington">Washington</a>, that urgency is even higher — freeze/thaw cycles are particularly damaging to unrepaired glass.</p>
+<p>If you have a fresh chip, get it evaluated within a week. If you're in a cold-weather state like <a href="/shops/il">Illinois</a>, <a href="/shops/co">Colorado</a>, or <a href="/shops/wa">Washington</a>, that urgency is even higher — freeze/thaw cycles are particularly damaging to unrepaired glass.</p>
 
 <h2>The Cost Comparison</h2>
 <table>
@@ -295,7 +295,7 @@ export const blogPosts = [
 
 <h2>Finding a Shop That Does ADAS Calibration</h2>
 <p>Not every auto glass shop has the equipment and training to perform ADAS calibration in-house. Some shops perform the glass replacement and then send the vehicle to a dealer or specialty calibration center, which adds time and coordination to the process.</p>
-<p>When searching for a shop on <a href="/">ShieldFinder</a>, ask specifically whether they perform ADAS calibration in-house and what equipment they use (OEM-approved calibration tools are the gold standard). Shops in major metro areas like <a href="/shops/texas">Texas</a>, <a href="/shops/california">California</a>, and <a href="/shops/florida">Florida</a> are more likely to have in-house capability. Smaller markets may require dealer involvement.</p>
+<p>When searching for a shop on <a href="/">ShieldFinder</a>, ask specifically whether they perform ADAS calibration in-house and what equipment they use (OEM-approved calibration tools are the gold standard). Shops in major metro areas like <a href="/shops/tx">Texas</a>, <a href="/shops/ca">California</a>, and <a href="/shops/fl">Florida</a> are more likely to have in-house capability. Smaller markets may require dealer involvement.</p>
 
 <h2>Bottom Line</h2>
 <p>If your vehicle has any ADAS features, windshield recalibration is not optional — it's a safety requirement. Budget $150–$400 for it, confirm your insurance claim includes it, and choose a shop that performs it in-house or has a clear process for getting it done correctly. The consequences of skipping it are too serious to ignore.</p>
@@ -342,7 +342,7 @@ export const blogPosts = [
 
 <h3>Temperature</h3>
 <p>Urethane adhesive has a working temperature range. Most products work best between 40°F and 95°F (4°C–35°C). In extreme cold, adhesive can cure too slowly or fail to bond properly. In extreme heat, it can skin over before the glass is positioned correctly.</p>
-<p>Reputable mobile techs use temperature-appropriate adhesives and may decline to work in extreme conditions. If you're scheduling in states with harsh winters like <a href="/shops/illinois">Illinois</a>, <a href="/shops/colorado">Colorado</a>, or <a href="/shops/washington">Washington</a> during January or February, confirm the shop's cold-weather protocols.</p>
+<p>Reputable mobile techs use temperature-appropriate adhesives and may decline to work in extreme conditions. If you're scheduling in states with harsh winters like <a href="/shops/il">Illinois</a>, <a href="/shops/co">Colorado</a>, or <a href="/shops/wa">Washington</a> during January or February, confirm the shop's cold-weather protocols.</p>
 
 <h3>Rain</h3>
 <p>A light mist is manageable for experienced techs with proper tarping. Heavy rain is a problem — moisture can contaminate the adhesive bond and compromise the water seal. Most shops will reschedule if weather doesn't cooperate. If it rains after installation before the adhesive is cured, the seal may be compromised.</p>
@@ -379,7 +379,7 @@ export const blogPosts = [
 </ul>
 
 <h2>Finding Mobile Service in Your Area</h2>
-<p>Use <a href="/">ShieldFinder</a> to search for shops in your state and filter for mobile service. The "Mobile Service" badge identifies shops that offer on-site repairs. Available in most metro areas across the country, including <a href="/shops/texas">Texas</a>, <a href="/shops/florida">Florida</a>, <a href="/shops/georgia">Georgia</a>, <a href="/shops/arizona">Arizona</a>, and beyond.</p>
+<p>Use <a href="/">ShieldFinder</a> to search for shops in your state and filter for mobile service. The "Mobile Service" badge identifies shops that offer on-site repairs. Available in most metro areas across the country, including <a href="/shops/tx">Texas</a>, <a href="/shops/fl">Florida</a>, <a href="/shops/ga">Georgia</a>, <a href="/shops/az">Arizona</a>, and beyond.</p>
     `,
   },
 
@@ -462,7 +462,7 @@ export const blogPosts = [
 <p>A single comprehensive glass claim typically has no impact on your premium at renewal with most carriers. However, multiple glass claims in a 12-month period can trigger a review. Ask your insurer or agent directly: <em>"If I file this claim, will it affect my rate at renewal?"</em></p>
 
 <h2>Finding a Direct Billing Shop Near You</h2>
-<p>Use <a href="/">ShieldFinder</a> to find verified auto glass shops in your state. Shops marked with the "Insurance Direct" badge handle claims directly with major carriers. Available in all 50 states — from <a href="/shops/california">California</a> to <a href="/shops/new-york">New York</a> to <a href="/shops/texas">Texas</a>.</p>
+<p>Use <a href="/">ShieldFinder</a> to find verified auto glass shops in your state. Shops marked with the "Insurance Direct" badge handle claims directly with major carriers. Available in all 50 states — from <a href="/shops/ca">California</a> to <a href="/shops/ny">New York</a> to <a href="/shops/tx">Texas</a>.</p>
     `,
   },
 
@@ -591,7 +591,7 @@ export const blogPosts = [
   <li>"Is recalibration included in the quote?"</li>
   <li>"Do you recommend OEM or aftermarket glass for this vehicle?"</li>
 </ul>
-<p>Find verified auto glass shops near you with <a href="/">ShieldFinder</a>. Shops across <a href="/shops/texas">Texas</a>, <a href="/shops/california">California</a>, <a href="/shops/florida">Florida</a>, and all 50 states — with insurance direct billing information upfront.</p>
+<p>Find verified auto glass shops near you with <a href="/">ShieldFinder</a>. Shops across <a href="/shops/tx">Texas</a>, <a href="/shops/ca">California</a>, <a href="/shops/fl">Florida</a>, and all 50 states — with insurance direct billing information upfront.</p>
     `,
   },
 
@@ -621,7 +621,7 @@ export const blogPosts = [
 
 <h3>Weather Conditions</h3>
 <p>Mobile installations are weather-dependent — heavy rain, extreme cold (below 20°F), or high wind can delay or reschedule service. Shop-based installations are weather-independent since the work happens indoors.</p>
-<p>If you're in a northern state in winter (<a href="/shops/illinois">Illinois</a>, <a href="/shops/colorado">Colorado</a>, <a href="/shops/washington">Washington</a>), mobile same-day service in January is less reliable than in-shop service. Book the shop directly if timing is critical.</p>
+<p>If you're in a northern state in winter (<a href="/shops/il">Illinois</a>, <a href="/shops/co">Colorado</a>, <a href="/shops/wa">Washington</a>), mobile same-day service in January is less reliable than in-shop service. Book the shop directly if timing is critical.</p>
 
 <h2>Scheduling Same-Day Service</h2>
 
@@ -658,7 +658,7 @@ export const blogPosts = [
   <li>Ask about ADAS recalibration if your vehicle has it</li>
   <li>Book the first available slot that works for your schedule</li>
 </ol>
-<p>Shops are available across all major metros — <a href="/shops/texas">Texas</a>, <a href="/shops/california">California</a>, <a href="/shops/florida">Florida</a>, <a href="/shops/georgia">Georgia</a>, <a href="/shops/arizona">Arizona</a>, and beyond. Mobile service is available in most markets if you can't bring the vehicle to the shop.</p>
+<p>Shops are available across all major metros — <a href="/shops/tx">Texas</a>, <a href="/shops/ca">California</a>, <a href="/shops/fl">Florida</a>, <a href="/shops/ga">Georgia</a>, <a href="/shops/az">Arizona</a>, and beyond. Mobile service is available in most markets if you can't bring the vehicle to the shop.</p>
 
 <h2>Bottom Line</h2>
 <p>Same-day replacement is realistic for most drivers with common vehicles, good weather, and an early morning phone call. ADAS vehicles can still qualify same-day with the right shop. Your main variable is parts availability — calling ahead to confirm your glass is in stock eliminates the biggest uncertainty.</p>
@@ -826,7 +826,7 @@ export const blogPosts = [
 
 <h2>Tips for LA Shoppers</h2>
 <p>Call ahead to confirm stock for your specific vehicle — LA shops serve so many vehicle types that some specialty glass (Tesla, certain luxury imports, older vehicles) may require ordering. Mobile service is widely available and particularly convenient in neighborhoods with scarce parking or heavy traffic. Ask any shop about ADAS recalibration upfront if your vehicle has driver assistance features.</p>
-<p>Find verified auto glass shops throughout the Los Angeles area at <a href="/shops/california">ShieldFinder California directory</a>.</p>
+<p>Find verified auto glass shops throughout the Los Angeles area at <a href="/shops/ca">ShieldFinder California directory</a>.</p>
     `,
   },
   {
@@ -853,7 +853,7 @@ export const blogPosts = [
 <h2>Finding Shops in Chicago</h2>
 <p>Chicago has a strong network of independent auto glass shops, particularly along major commercial corridors in the northwest and southwest sides, and in the inner-ring suburbs. National chains are well-represented in the suburbs; independent shops dominate the city proper. ADAS recalibration is available at most established shops throughout the metro.</p>
 <p>Winter is the busiest season for Chicago auto glass — book appointments early after major weather events. Mobile service is available but weather-dependent: most shops won't do mobile installations in sub-freezing temperatures or snow due to the effect on urethane adhesive curing.</p>
-<p>Find verified shops throughout the Chicago metro at <a href="/shops/illinois">ShieldFinder Illinois directory</a>.</p>
+<p>Find verified shops throughout the Chicago metro at <a href="/shops/il">ShieldFinder Illinois directory</a>.</p>
     `,
   },
   {
@@ -879,7 +879,7 @@ export const blogPosts = [
 <h2>Finding Shops in Houston</h2>
 <p>Houston's auto glass market is large and competitive, with strong shop density along Highway 290, the Katy Freeway, and in Pearland, Sugar Land, and The Woodlands. Same-day and next-day appointments are typically available at most times of year; post-hail events see surge demand and longer wait times.</p>
 <p>Mobile service is widely available throughout the metro and is particularly popular in Houston due to the difficulty of navigating traffic for a non-emergency appointment. ADAS recalibration is standard at most established Houston shops.</p>
-<p>Find verified auto glass shops across the Houston metro at <a href="/shops/texas">ShieldFinder Texas directory</a>.</p>
+<p>Find verified auto glass shops across the Houston metro at <a href="/shops/tx">ShieldFinder Texas directory</a>.</p>
     `,
   },
   {
@@ -906,7 +906,7 @@ export const blogPosts = [
 <p>The biggest challenge for NYC drivers isn't finding a shop — it's accessing one. If you don't have a driveway or dedicated parking, mobile service is often the most practical option. Many NYC-area shops offer mobile service throughout the five boroughs and Long Island; some require a parking spot or driveway for installation (the adhesive needs a level, sheltered surface).</p>
 <p>In-shop appointments are available throughout the metro in Queens, Brooklyn, the Bronx, Staten Island, and in New Jersey. Manhattan shops exist but are limited by space and vehicle access logistics.</p>
 <p>ADAS recalibration capability is strong at dealer-affiliated shops in the metro; some independent shops may need to send vehicles out for recalibration.</p>
-<p>Find verified shops across the New York metro at <a href="/shops/new-york">ShieldFinder New York directory</a>.</p>
+<p>Find verified shops across the New York metro at <a href="/shops/ny">ShieldFinder New York directory</a>.</p>
     `,
   },
   {
@@ -932,7 +932,7 @@ export const blogPosts = [
 <h2>Finding Shops in Phoenix</h2>
 <p>Phoenix has a large, competitive auto glass market with strong shop density throughout the Valley. The East Valley (Mesa, Gilbert, Chandler) and West Valley (Glendale, Peoria, Surprise) both have good shop networks. Same-day and next-day appointments are widely available; post-monsoon hail events see short-term surge demand but typically clear within a week.</p>
 <p>ADAS recalibration is standard at most Phoenix-area shops. Mobile service is available throughout the metro but weather-dependent — extreme heat (120°F+) can affect urethane curing, so some shops limit outdoor mobile service during peak summer heat.</p>
-<p>Find verified shops across the Phoenix metro at <a href="/shops/arizona">ShieldFinder Arizona directory</a>.</p>
+<p>Find verified shops across the Phoenix metro at <a href="/shops/az">ShieldFinder Arizona directory</a>.</p>
     `,
   },
   {
@@ -1029,7 +1029,7 @@ export const blogPosts = [
 </ol>
 <p>A shop that answers all five confidently and in specifics is worth booking. A shop that deflects or generalizes is not.</p>
 
-<p>Find verified auto glass shops across Greater Houston — with insurance direct billing, ADAS recalibration availability, and user ratings — on the <a href="/shops/texas/houston">ShieldFinder Houston directory</a>.</p>
+<p>Find verified auto glass shops across Greater Houston — with insurance direct billing, ADAS recalibration availability, and user ratings — on the <a href="/shops/tx/houston">ShieldFinder Houston directory</a>.</p>
     `,
   },
 
@@ -1083,7 +1083,7 @@ export const blogPosts = [
   <li><strong>UV-rated urethane.</strong> Not all adhesives are equal in Phoenix sun — ask which product they use and whether it carries manufacturer high-UV specification.</li>
 </ul>
 
-<p>Find Valley-area shops that handle Phoenix-specific conditions — with ADAS recalibration and direct insurance billing — on the <a href="/shops/arizona/phoenix">ShieldFinder Phoenix directory</a>.</p>
+<p>Find Valley-area shops that handle Phoenix-specific conditions — with ADAS recalibration and direct insurance billing — on the <a href="/shops/az/phoenix">ShieldFinder Phoenix directory</a>.</p>
     `,
   },
 
@@ -1142,7 +1142,7 @@ export const blogPosts = [
 </ul>
 <p>For Fort Worth drivers specifically, some Dallas shops will quote Fort Worth jobs but the drive time math often makes a local Fort Worth shop the better pick for mobile service.</p>
 
-<p>Find verified auto glass shops serving both Dallas and Fort Worth — including insurance direct billing for post-hail claims and ADAS recalibration — on the <a href="/shops/texas/dallas">ShieldFinder Dallas directory</a> and in Fort Worth listings on the Texas directory.</p>
+<p>Find verified auto glass shops serving both Dallas and Fort Worth — including insurance direct billing for post-hail claims and ADAS recalibration — on the <a href="/shops/tx/dallas">ShieldFinder Dallas directory</a> and in Fort Worth listings on the Texas directory.</p>
     `,
   },
 
@@ -1195,7 +1195,7 @@ export const blogPosts = [
 <h2>Construction Zone Considerations</h2>
 <p>Chicago runs active construction on one or more major expressways virtually year-round. The <strong>Kennedy</strong> has been in rolling reconstruction since 2023. Construction zones concentrate debris and narrow lanes bring vehicles closer to truck wheels. If your commute routes you through an active zone, your chip frequency will be measurably higher — and a chip-repair habit (fix them within a week, every time) pays for itself.</p>
 
-<p>Find verified Chicago-area auto glass shops with heated bays, winter-rated urethane, and insurance direct billing on the <a href="/shops/illinois/chicago">ShieldFinder Chicago directory</a>.</p>
+<p>Find verified Chicago-area auto glass shops with heated bays, winter-rated urethane, and insurance direct billing on the <a href="/shops/il/chicago">ShieldFinder Chicago directory</a>.</p>
     `,
   },
 
@@ -1258,7 +1258,7 @@ export const blogPosts = [
   <li>"What's your written warranty on installation, and does it cover leaks and stress cracks?"</li>
 </ol>
 
-<p>Find verified auto glass shops across San Antonio — including mobile operators with base access, post-hail surge capacity, and insurance direct billing — on the <a href="/shops/texas/san-antonio">ShieldFinder San Antonio directory</a>.</p>
+<p>Find verified auto glass shops across San Antonio — including mobile operators with base access, post-hail surge capacity, and insurance direct billing — on the <a href="/shops/tx/san-antonio">ShieldFinder San Antonio directory</a>.</p>
     `,
   },
 
@@ -1321,11 +1321,11 @@ export const blogPosts = [
   <li><strong>Vehicle mix.</strong> These states have a higher share of luxury European vehicles (BMW, Mercedes, Audi) and newer ADAS-equipped vehicles, which raises the average ticket.</li>
   <li><strong>Regulatory cost.</strong> California's environmental handling requirements for automotive adhesives add small but real costs to operations.</li>
 </ul>
-<p>Within California alone, you'll see variation: shops in <a href="/shops/california">the greater Bay Area and Los Angeles</a> quote higher than Central Valley or Inland Empire shops. The same is true in New York — <a href="/shops/new-york">Manhattan and western Long Island</a> run higher than upstate.</p>
+<p>Within California alone, you'll see variation: shops in <a href="/shops/ca">the greater Bay Area and Los Angeles</a> quote higher than Central Valley or Inland Empire shops. The same is true in New York — <a href="/shops/ny">Manhattan and western Long Island</a> run higher than upstate.</p>
 
 <h2>Mid-Cost States: $300–$500 Standard, $500–$1,000 ADAS</h2>
 <p>Texas, Florida, Illinois, Pennsylvania, Virginia, Colorado, Washington, Maryland, Georgia, and Minnesota fall into the middle band. These states have significant metro markets (Dallas, Miami, Chicago, Denver, Seattle) with competitive shop networks, reasonable labor rates, and strong glass distributor coverage.</p>
-<p><a href="/shops/texas">Texas</a> in particular has some of the most competitive auto glass pricing in the country for its metro size — the DFW, Houston, and Austin markets have dense shop networks that keep pricing disciplined. <a href="/shops/florida">Florida</a> prices run slightly higher than Texas largely due to the state's mandatory zero-deductible windshield law (more on that below), which increases replacement volume and shop demand.</p>
+<p><a href="/shops/tx">Texas</a> in particular has some of the most competitive auto glass pricing in the country for its metro size — the DFW, Houston, and Austin markets have dense shop networks that keep pricing disciplined. <a href="/shops/fl">Florida</a> prices run slightly higher than Texas largely due to the state's mandatory zero-deductible windshield law (more on that below), which increases replacement volume and shop demand.</p>
 <p>ADAS-equipped vehicle replacement in these states typically clears $700 once recalibration is added. For a Honda CR-V with Honda Sensing: expect $450–$550 for the glass and labor, plus $200–$300 for recalibration.</p>
 
 <h2>Low-Cost States: $250–$400 Standard, $450–$800 ADAS</h2>
@@ -1416,14 +1416,14 @@ export const blogPosts = [
 
 <h2>Steering: You Choose Your Shop in Texas</h2>
 <p>Texas law protects your right to choose your own auto glass shop. An insurer cannot legally require you to use their preferred or network shop. If a claims representative pressures you toward a specific shop, you can politely decline and name the shop you want to use.</p>
-<p>That said, using a network or preferred shop isn't inherently bad — these shops have streamlined billing relationships with the insurer, which can make the claim go faster. The key is that you have the choice. If you prefer a local independent shop on <a href="/shops/texas">ShieldFinder's Texas directory</a>, your insurer is required to honor that choice and pay the claim.</p>
+<p>That said, using a network or preferred shop isn't inherently bad — these shops have streamlined billing relationships with the insurer, which can make the claim go faster. The key is that you have the choice. If you prefer a local independent shop on <a href="/shops/tx">ShieldFinder's Texas directory</a>, your insurer is required to honor that choice and pay the claim.</p>
 
 <h2>Step-by-Step: Filing a Texas Windshield Claim</h2>
 <ol>
   <li><strong>Document the damage.</strong> Take photos before anything else. Close-up of the chip or crack, wide shot of the windshield, and VIN if accessible.</li>
   <li><strong>Check your deductible.</strong> Log into your insurer's app or portal, or call your agent. Know the number before you call the shop.</li>
   <li><strong>Decide: file or pay cash?</strong> If the replacement cost is below your deductible, skip the claim and pay directly — it's faster.</li>
-  <li><strong>Choose your shop.</strong> Find a Texas shop on <a href="/shops/texas">ShieldFinder</a> with insurance direct billing. Confirm they handle your carrier.</li>
+  <li><strong>Choose your shop.</strong> Find a Texas shop on <a href="/shops/tx">ShieldFinder</a> with insurance direct billing. Confirm they handle your carrier.</li>
   <li><strong>Provide insurance info to the shop.</strong> Policy number, claim number (if you filed separately), and your preferred appointment window.</li>
   <li><strong>Pay only your deductible at service</strong> — the shop bills your insurer for the balance.</li>
 </ol>
@@ -1443,7 +1443,7 @@ export const blogPosts = [
 
 <h2>The Bottom Line for Texas Drivers</h2>
 <p>Texas doesn't give you zero-deductible windshield coverage by default — that's reserved for six specific states. But with comprehensive coverage, chip repair is almost always free, and full replacement is covered once you've met your deductible. Consider adding a glass endorsement if you drive the state's high-exposure corridors. And remember: you choose your shop, not the insurer.</p>
-<p>Find verified auto glass shops across Texas at <a href="/shops/texas">ShieldFinder's Texas directory</a>, with listings for Houston, Dallas-Fort Worth, Austin, San Antonio, El Paso, and metros across the state.</p>
+<p>Find verified auto glass shops across Texas at <a href="/shops/tx">ShieldFinder's Texas directory</a>, with listings for Houston, Dallas-Fort Worth, Austin, San Antonio, El Paso, and metros across the state.</p>
     `,
   },
 
@@ -1505,7 +1505,7 @@ export const blogPosts = [
 
 <h2>ADAS Recalibration in Florida</h2>
 <p>ADAS recalibration — required for most 2018+ vehicles with lane-keeping, emergency braking, or adaptive cruise — is covered under 627.7288 as part of windshield replacement. Zero deductible applies. The insurer pays the full cost, typically $150–$400 depending on the vehicle.</p>
-<p>Make sure your shop quotes recalibration on the work order if your vehicle requires it. Florida shops in <a href="/shops/florida">Miami, Tampa, Orlando, and Jacksonville</a> have strong ADAS recalibration capability in-house.</p>
+<p>Make sure your shop quotes recalibration on the work order if your vehicle requires it. Florida shops in <a href="/shops/fl">Miami, Tampa, Orlando, and Jacksonville</a> have strong ADAS recalibration capability in-house.</p>
 
 <h2>Chip Repair: Also Typically Zero-Deductible</h2>
 <p>Most Florida insurers extend zero-deductible treatment to chip repair under comprehensive coverage. The reasoning: a $75 chip repair prevents a $500+ replacement later. Insurers actively want you to repair small chips before they spread.</p>
@@ -1531,7 +1531,7 @@ export const blogPosts = [
 
 <h2>The Bottom Line for Florida Drivers</h2>
 <p>Florida Statute 627.7288 is genuinely one of the most consumer-friendly insurance laws in the country. If you have comprehensive coverage, your windshield is free — period. HB 541's reform eliminated AOB abuse but didn't touch the underlying zero-deductible protection. Choose your own shop, don't sign AOB forms, and confirm comprehensive is on your policy.</p>
-<p>Find verified Florida auto glass shops at <a href="/shops/florida">ShieldFinder's Florida directory</a>, covering Miami-Dade, Broward, Orange, Hillsborough, Duval, and all Florida metros.</p>
+<p>Find verified Florida auto glass shops at <a href="/shops/fl">ShieldFinder's Florida directory</a>, covering Miami-Dade, Broward, Orange, Hillsborough, Duval, and all Florida metros.</p>
     `,
   },
 
