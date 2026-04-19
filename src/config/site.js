@@ -31,7 +31,7 @@ export const siteConfig = {
 
   // ── Analytics / Ads ────────────────────────────────────────────────────────
   analytics: {
-    ga4Id: "G-GZ3W60WB6N",
+    ga4Id: "G-GZ3W60WB6W",
     adsenseClient: "ca-pub-6583010255692976",
     adSlots: {
       homepageBelowHero: "",    // Fill in after AdSense approval — create unit in AdSense > Ads > By ad unit
