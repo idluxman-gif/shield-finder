@@ -37,7 +37,13 @@ export function generateMetadata({ params }) {
   return {
     title: `${shop.n} - ${listing.categoryLabel} in ${shop.c}, ${stateName} | ${displayName}`,
     description: `${shop.n} in ${shop.c}, ${stateName}. ${shop.r}★ rating from ${shop.v.toLocaleString()} reviews. ${listing.metaSavings}`,
-    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}/${params.city}/${params.slug}` },
+    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}/${params.city}/${params.slug}/` },
+    // Individual shop detail pages are profile-style listings without enough
+    // unique editorial content to warrant indexing on their own. They remain
+    // accessible to visitors and crawlers (follow), but should not be indexed
+    // — this prevents thousands of thin pages from diluting the site's
+    // overall content-quality signal.
+    robots: { index: false, follow: true },
   };
 }
 

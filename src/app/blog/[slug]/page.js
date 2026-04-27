@@ -16,12 +16,12 @@ export function generateMetadata({ params }) {
   return {
     title: `${post.title} | ${displayName}`,
     description: post.excerpt,
-    alternates: { canonical: `${domain}/blog/${post.slug}` },
+    alternates: { canonical: `${domain}/blog/${post.slug}/` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
-      url: `${domain}/blog/${post.slug}`,
+      url: `${domain}/blog/${post.slug}/`,
       publishedTime: post.publishedAt,
     },
   };

@@ -23,7 +23,7 @@ export function generateMetadata({ params }) {
   return {
     title: `${listing.categoryLabel} ${listing.plural} in ${stateName} (${stateShops.length}) | ${displayName}`,
     description: `Find ${stateShops.length} verified ${listing.categoryLabel.toLowerCase()} ${listing.plural} in ${stateName}. ${listing.metaSavings}`,
-    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}` },
+    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}/` },
   };
 }
 

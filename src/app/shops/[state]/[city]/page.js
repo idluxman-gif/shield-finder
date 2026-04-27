@@ -8,6 +8,11 @@ import { Suspense } from 'react';
 import { isPremium } from '@/lib/premium';
 import { cityEditorial } from '@/data/cityEditorial';
 
+// Cities with fewer than this many shops AND no editorial block are
+// considered thin pages — they get noindex,follow to keep them out of
+// Google's index without breaking the in-site browsing flow.
+const MIN_CITY_SHOPS_FOR_INDEX = 5;
+
 const TIER_CONFIG = {
   '$':   { bg: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)', accent: '#94A3B8', label: '$ Budget' },
   '$$':  { bg: 'linear-gradient(135deg, #0C4A6E 0%, #075985 100%)', accent: '#7DD3FC', label: '$$ Mid-Range' },
@@ -42,10 +47,13 @@ export function generateMetadata({ params }) {
   const cityShops = shops.filter(s => s.s === stateCode && getCitySlug(s.c) === params.city);
   if (cityShops.length === 0) return {};
   const cityName = cityShops[0].c;
+  const hasEditorial = !!cityEditorial[`${stateCode}-${cityName}`];
+  const isThin = cityShops.length < MIN_CITY_SHOPS_FOR_INDEX && !hasEditorial;
   return {
     title: `${listing.categoryLabel} ${listing.plural} in ${cityName}, ${stateName} | ${displayName}`,
     description: `Find ${cityShops.length} ${listing.categoryLabel.toLowerCase()} ${listing.plural} in ${cityName}, ${stateName}. ${listing.metaSavings}`,
-    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}/${params.city}` },
+    alternates: { canonical: `/${siteConfig.listingsRoute}/${params.state}/${params.city}/` },
+    robots: isThin ? { index: false, follow: true } : undefined,
   };
 }
 

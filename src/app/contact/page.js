@@ -7,7 +7,7 @@ const { domain } = siteConfig;
 export const metadata = {
   title: `Contact Us | ShieldFinder`,
   description: 'Get in touch with ShieldFinder. Report incorrect listings, suggest new auto glass shops, or ask a question.',
-  alternates: { canonical: `${domain}/contact` },
+  alternates: { canonical: `${domain}/contact/` },
 };
 
 export default function ContactPage() {

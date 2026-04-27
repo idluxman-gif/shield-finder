@@ -9,7 +9,7 @@ export const metadata = {
   title: `Auto Glass Repair Tips & Guides | ${displayName} Blog`,
   description:
     'Expert guides on windshield replacement costs, insurance claims, chip repair, ADAS recalibration, and more. Everything you need to know about auto glass repair.',
-  alternates: { canonical: `${domain}/blog` },
+  alternates: { canonical: `${domain}/blog/` },
   openGraph: {
     title: `Auto Glass Repair Tips & Guides | ${displayName} Blog`,
     description:

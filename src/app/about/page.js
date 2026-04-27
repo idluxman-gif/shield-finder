@@ -7,7 +7,7 @@ const { domain } = siteConfig;
 export const metadata = {
   title: `About ShieldFinder | Independent Auto Glass Repair Directory`,
   description: 'ShieldFinder is a free, consumer-focused directory of verified independent auto glass shops across all 50 states. Learn how we verify listings, why we built it, how listings work, and how we make money — plainly stated.',
-  alternates: { canonical: `${domain}/about` },
+  alternates: { canonical: `${domain}/about/` },
 };
 
 const h2Style = { fontSize: 22, fontWeight: 800, color: '#0C1A2E', margin: '32px 0 12px', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" };
