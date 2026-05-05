@@ -10,6 +10,7 @@ import nextDynamic from 'next/dynamic';
 import QuoteForm from './QuoteForm';
 import PremiumLeadForm from './PremiumLeadForm';
 import { isPremium } from '@/lib/premium';
+import { generateShopEditorial } from '@/lib/shopEditorial';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,7 +58,9 @@ export default async function ShopPage({ params }) {
   const premium = await isPremium(shop.i);
   const stateName = stateNames[shop.s];
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.n + ' ' + shop.a)}`;
-  const otherShops = shops.filter(s => s.c === shop.c && s.s === shop.s && s.i !== shop.i).slice(0, 4);
+  const cityShops = shops.filter(s => s.c === shop.c && s.s === shop.s);
+  const otherShops = cityShops.filter(s => s.i !== shop.i).slice(0, 4);
+  const editorialParagraphs = generateShopEditorial(shop, cityShops);
 
   const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -289,16 +292,16 @@ export default async function ShopPage({ params }) {
                 </div>
               </div>
 
-              {/* About */}
+              {/* About — substantive per-shop editorial generated from real data */}
               <div style={{ marginBottom: 24 }}>
-                <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0C1A2E', marginBottom: 8, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>About {shop.n}</h2>
-                <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7 }}>
-                  {shop.n} is an {listing.categoryLabel.toLowerCase()} {listing.singular} located in {shop.c}, {stateName}.
-                  {shop.ins ? ' They work directly with insurance providers for hassle-free claims.' : ''}
-                  {shop.mob ? ' Mobile service available — they come to you.' : ''}
-                  {' '}With a {shop.r}-star rating from {shop.v.toLocaleString()} reviews, they are
-                  a {shop.r >= 4.7 ? 'highly-rated' : 'well-reviewed'} {listing.singular} in the {shop.c} area.
-                </p>
+                <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0C1A2E', marginBottom: 12, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>About {shop.n}</h2>
+                {editorialParagraphs.map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, margin: '0 0 12px' }}
+                    dangerouslySetInnerHTML={{ __html: paragraph }}
+                  />
+                ))}
               </div>
 
               {/* Lead form — premium gets dedicated PremiumLeadForm, others get generic QuoteForm */}
